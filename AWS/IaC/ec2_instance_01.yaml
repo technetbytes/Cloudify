@@ -8,7 +8,7 @@ Parameters:
   pAmiId:
     Type: 'AWS::EC2::Image::Id'
     Description: 'The AMI ID to use'
-    Default: 'ami-0889a44b331db0194'
+    Default: 'ami-0889a44b331db0194' # Get ami id using AMI Template from aws console, it will use the region-specific AMI, the value of which is stored in the AWS Systems Manager Parameter Store
   pAmiType:
     Type: String
     Description: 'The AMI instance type to use'
