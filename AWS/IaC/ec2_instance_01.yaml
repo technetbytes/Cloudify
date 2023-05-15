@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Part 1 - Build a webapp stack with CloudFormation
+Parameters:
+  pCidr:
+    Type: String
+    Description: 'the CIDR range of the VPC'
+    Default: '10.0.0.0/24'
+  pAmiId:
+    Type: 'AWS::EC2::Image::Id'
+    Description: 'The AMI ID to use'
+    Default: 'ami-0889a44b331db0194'
+  pAmiType:
+    Type: String
+    Description: 'The AMI instance type to use'
+    Default: 't2.micro'
+Resources:
+  WebAppInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref pAmiId
+      InstanceType: !Ref pAmiType
