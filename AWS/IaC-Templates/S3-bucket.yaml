@@ -5,20 +5,19 @@ Description: ---
   - Create a new S3 bucket without policy
 Parameters: 
   paramS3Name:
-    Description: 
-    Type: AWS::EC2::Instance::Id
-    Default: test-s3bucket-using-iac
+    Description: Name of s3 bucket
+    Type: String
+    Default: 'test-s3bucket-using-iac'
 Resources: 
   mytestings3Bucket:
     Type: 'AWS::S3::Bucket'
-    DeletionPolicy: Delete
+    DeletionPolicy: Delete #allow CloudFormation delete the bucket when stack is deleted
     Properties:
       BucketName: !Ref paramS3Name
       Tags:
         - Key: 'name'
           Value: 'testing-bucket'
 Outputs:
-  outputWebsiteURL:
-    Value: !GetAtt
-      - mytestings3Bucket
-    Description: Static website URL
+  bucketName:
+    Value: !Ref mytestings3Bucket
+    Description: my testing bucket description
