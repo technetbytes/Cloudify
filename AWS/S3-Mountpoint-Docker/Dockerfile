@@ -20,16 +20,21 @@ ENV MOUNT_PATH=/mount_s3
 
 RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
     apt-get update && \
-    apt-get install -y awscli wget python3 fuse libfuse2 && \
+    apt-get install -y wget zip && \
+    wget "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
+    unzip awscli-exe-linux-x86_64.zip && \
+    ./aws/install && \
+    apt-get install -y tzdata python3 fuse libfuse2 && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
-    wget https://s3.amazonaws.com/mountpoint-s3-release/latest/arm64/mount-s3.deb && \
+    wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb && \
     dpkg -i mount-s3.deb && \
     apt clean && \
     mkdir $MOUNT_PATH && \
     rm -rf /var/lib/apt/lists/* /mount-s3.deb
 
-COPY entrypoint.sh /entrypoint.sh
+# COPY entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]
+CMD [ "bash" ]
