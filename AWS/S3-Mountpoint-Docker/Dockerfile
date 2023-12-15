@@ -32,9 +32,11 @@ RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
     mkdir $MOUNT_PATH && \
     rm -rf /var/lib/apt/lists/* /mount-s3.deb
 
-# COPY entrypoint.sh /entrypoint.sh
+COPY test.py /test.py
 
-# RUN chmod +x /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
-# ENTRYPOINT ["/entrypoint.sh"]
-CMD [ "bash" ]
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+# CMD [ "bash" ]

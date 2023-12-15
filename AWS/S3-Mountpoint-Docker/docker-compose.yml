@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ubuntumountpoint:
+    container_name: "s3-mountpoint"
+    build: .
+    image: s3-mountpoint
+    cap_add:
+      - "SYS_ADMIN"
+    devices:
+      - "/dev/fuse"
+    volumes:
+      - ~/.aws:/root/.aws
